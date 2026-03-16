@@ -1,0 +1,4 @@
+ssh:
+  port: 22
+  permit_root_login: 'no'
+  password_authentication: 'no'
