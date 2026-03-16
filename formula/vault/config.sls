@@ -19,6 +19,7 @@ vault_config:
     - formatter: json
     - dataset:
         ui: {{ vault.ui }}
+        disable_mlock: {{ vault.get('disable_mlock', false) }}
         storage:
           file:
             path: {{ vault.storage_path }}
