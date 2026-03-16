@@ -1,0 +1,2 @@
+{% import_yaml "sysctl/defaults.yaml" as defaults %}
+{%- set sysctl = salt['pillar.get']('sysctl', default=defaults.sysctl, merge=True) %}
