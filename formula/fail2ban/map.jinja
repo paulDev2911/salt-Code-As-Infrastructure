@@ -1,0 +1,2 @@
+{% import_yaml "fail2ban/defaults.yaml" as defaults %}
+{%- set fail2ban = salt['pillar.get']('fail2ban', default=defaults.fail2ban, merge=True) %}
