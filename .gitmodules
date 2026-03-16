@@ -1,0 +1,3 @@
+[submodule "formula/vault-formula"]
+	path = formula/vault-formula
+	url = https://github.com/saltstack-formulas/vault-formula
