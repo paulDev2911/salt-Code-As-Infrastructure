@@ -1,32 +1,31 @@
-{% from "vault/map.jinja" import defaults with context %}
-{% set vault = salt['pillar.get']('vault', {}) %}
+{% from "vault/map.jinja" import vault with context %}
 
 vault_data_dir:
   file.directory:
-    - name: {{ vault.get('storage_path', defaults.storage_path) }}
+    - name: {{ vault.storage_path }}
     - user: vault
     - group: vault
     - mode: '0750'
     - makedirs: true
+    - require:
+      - pkg: vault_pkg
 
 vault_config:
-  file.managed:
+  file.serialize:
     - name: /etc/vault.d/vault.hcl
-    - mode: '0640'
     - user: vault
     - group: vault
-    - contents: |
-        ui = {{ vault.get('ui', defaults.ui) | lower }}
-
-        storage "file" {
-          path = "{{ vault.get('storage_path', defaults.storage_path) }}"
-        }
-
-        listener "tcp" {
-          address     = "{{ vault.get('listen_address', defaults.listen_address) }}"
-          tls_disable = {{ vault.get('tls_disable', defaults.tls_disable) | int }}
-        }
-
-        api_addr = "http://{{ vault.get('listen_address', defaults.listen_address) }}"
+    - mode: '0640'
+    - formatter: json
+    - dataset:
+        ui: {{ vault.ui }}
+        storage:
+          file:
+            path: {{ vault.storage_path }}
+        listener:
+          tcp:
+            address: {{ vault.listen_address }}
+            tls_disable: {{ vault.tls_disable | int }}
+        api_addr: "http://{{ vault.listen_address }}"
     - require:
       - pkg: vault_pkg

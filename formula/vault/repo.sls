@@ -8,7 +8,7 @@ vault_repo:
     - name: deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com {{ grains['oscodename'] }} main
     - file: /etc/apt/sources.list.d/hashicorp.list
     - require:
-      - file: vault_repo_gpg
+      - cmd: vault_repo_gpg
 
 vault_pkg:
   pkg.installed:

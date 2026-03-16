@@ -1,8 +1,2 @@
-{% set defaults = {
-  'storage_path': '/opt/vault/data',
-  'listen_address': '0.0.0.0:8200',
-  'tls_disable': true,
-  'default_lease_ttl': '768h',
-  'max_lease_ttl': '768h',
-  'ui': true,
-} %}
+{% import_yaml "vault/defaults.yaml" as defaults %}
+{%- set vault = salt['pillar.get']('vault', default=defaults.vault, merge=True) %}
