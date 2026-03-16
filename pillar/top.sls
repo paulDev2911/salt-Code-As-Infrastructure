@@ -4,6 +4,7 @@ base:
     - common.ssh
     - common.fail2ban
     - common.sysctl
+    - common.unattended-upgrades
   'role:vault':
     - match: grain
     - vault

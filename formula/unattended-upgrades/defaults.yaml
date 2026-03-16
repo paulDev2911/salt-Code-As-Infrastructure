@@ -1,0 +1,31 @@
+unattended_upgrades:
+  # Only security updates - never regular upgrades
+  allowed_origins:
+    - "${distro_id}:${distro_codename}-security"
+    - "${distro_id}ESMApps:${distro_codename}-apps-security"
+    - "${distro_id}ESM:${distro_codename}-infra-security"
+
+  package_blacklist: []
+
+  update_package_lists: 1
+  unattended_upgrade: 1
+  download_upgradeable: 1
+  autoclean_interval: 7
+
+  auto_fix_interrupted_dpkg: true
+  minimal_steps: true
+  remove_unused_dependencies: true
+  remove_new_unused_dependencies: true
+
+  # Reboot (disabled by default - enable explicitly per host)
+  automatic_reboot: false
+  automatic_reboot_time: "02:00"
+  automatic_reboot_with_users: false
+
+  # Logging
+  syslog_enable: true
+  syslog_facility: daemon
+
+  # Mail 
+  mail: ""
+  mail_report: only-on-error

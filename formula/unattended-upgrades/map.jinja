@@ -1,0 +1,2 @@
+{% import_yaml "unattended-upgrades/defaults.yaml" as defaults %}
+{%- set unattended_upgrades = salt['pillar.get']('unattended_upgrades', default=defaults.unattended_upgrades, merge=True) %}
