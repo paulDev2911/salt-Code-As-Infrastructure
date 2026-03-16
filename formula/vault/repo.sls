@@ -1,9 +1,7 @@
 vault_repo_gpg:
-  file.managed:
-    - name: /usr/share/keyrings/hashicorp-archive-keyring.gpg
-    - source: https://apt.releases.hashicorp.com/gpg
-    - source_hash: false
-    - skip_verify: true
+  cmd.run:
+    - name: curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    - creates: /usr/share/keyrings/hashicorp-archive-keyring.gpg
 
 vault_repo:
   pkgrepo.managed:
