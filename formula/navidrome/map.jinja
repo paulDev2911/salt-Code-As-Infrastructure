@@ -1,0 +1,2 @@
+{% import_yaml "navidrome/defaults.yaml" as defaults %}
+{%- set navidrome = salt['pillar.get']('navidrome', default=defaults.navidrome, merge=True) %}

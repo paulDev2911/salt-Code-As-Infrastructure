@@ -8,3 +8,5 @@ base:
   'role:vault':
     - match: grain
     - vault
+  'media':
+    - navidrome
