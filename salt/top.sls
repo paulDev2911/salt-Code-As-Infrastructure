@@ -10,3 +10,4 @@ base:
     - vault
   'media':
     - navidrome
+    - jellyfin
