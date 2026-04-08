@@ -1,3 +1,13 @@
+{% from "vaultwarden/map.jinja" import vaultwarden with context %}
+
+vaultwarden_data_dir:
+  file.directory:
+    - name: {{ vaultwarden.data_folder }}
+    - user: root
+    - group: root
+    - mode: '0750'
+    - makedirs: true
+
 vaultwarden_container:
   docker_container.running:
     - name: vaultwarden
