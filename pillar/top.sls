@@ -11,3 +11,5 @@ base:
   'media':
     - media.navidrome
     - media.jellyfin
+  'vault':
+    - vault.vaultwarden
