@@ -10,7 +10,8 @@ navidrome_config:
     - contents: |
         MusicFolder = "{{ navidrome.music_folder }}"
         DataFolder   = "{{ navidrome.data_folder }}"
-        Address      = "{{ navidrome.listen_address }}"
+        Address      = "0.0.0.0"
+        Port         = 4533
         LogLevel     = "{{ navidrome.log_level }}"
     - require:
       - user: navidrome_user
