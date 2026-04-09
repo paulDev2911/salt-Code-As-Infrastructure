@@ -16,6 +16,16 @@ nextcloud_php_ini:
         opcache.max_accelerated_files = 10000
         opcache.revalidate_freq = 1
         opcache.save_comments = 1
+        apc.enable_cli = 1
+    - require:
+      - pkg: nextcloud_php_pkgs
+
+nextcloud_php_cli_ini:
+  file.managed:
+    - name: /etc/php/{{ nextcloud.php_version }}/cli/conf.d/99-nextcloud-cli.ini
+    - mode: '0644'
+    - contents: |
+        apc.enable_cli = 1
     - require:
       - pkg: nextcloud_php_pkgs
 
