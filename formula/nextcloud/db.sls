@@ -2,7 +2,9 @@
 
 nextcloud_postgresql:
   pkg.installed:
-    - name: postgresql
+    - pkgs:
+      - postgresql
+      - python3-psycopg2
 
 nextcloud_postgresql_service:
   service.running:
@@ -12,33 +14,24 @@ nextcloud_postgresql_service:
       - pkg: nextcloud_postgresql
 
 nextcloud_db_user:
-  postgres_user.present:
-    - name: {{ nextcloud.db_user }}
-    - password: {{ nextcloud.db_password }}
-    - encrypted: false
+  cmd.run:
+    - name: |
+        sudo -u postgres psql -tc "SELECT 1 FROM pg_roles WHERE rolname='{{ nextcloud.db_user }}'" | grep -q 1 || \
+        sudo -u postgres psql -c "CREATE USER {{ nextcloud.db_user }} WITH PASSWORD '{{ nextcloud.db_password }}';"
+        sudo -u postgres psql -c "ALTER USER {{ nextcloud.db_user }} WITH PASSWORD '{{ nextcloud.db_password }}';"
     - require:
       - service: nextcloud_postgresql_service
 
-nextcloud_db_user_password:
-  cmd.run:
-    - name: sudo -u postgres psql -c "ALTER USER {{ nextcloud.db_user }} WITH PASSWORD '{{ nextcloud.db_password }}';"
-    - require:
-      - postgres_user: nextcloud_db_user
-
 nextcloud_db:
-  postgres_database.present:
-    - name: {{ nextcloud.db_name }}
-    - owner: {{ nextcloud.db_user }}
+  cmd.run:
+    - name: |
+        sudo -u postgres psql -tc "SELECT 1 FROM pg_database WHERE datname='{{ nextcloud.db_name }}'" | grep -q 1 || \
+        sudo -u postgres createdb -O {{ nextcloud.db_user }} {{ nextcloud.db_name }}
     - require:
-      - postgres_user: nextcloud_db_user
+      - cmd: nextcloud_db_user
 
 nextcloud_db_grant:
-  postgres_privileges.present:
-    - name: {{ nextcloud.db_user }}
-    - object_name: {{ nextcloud.db_name }}
-    - object_type: database
-    - privileges:
-      - ALL
+  cmd.run:
+    - name: sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE {{ nextcloud.db_name }} TO {{ nextcloud.db_user }};"
     - require:
-      - postgres_database: nextcloud_db
-      - postgres_user: nextcloud_db_user
+      - cmd: nextcloud_db
