@@ -1,3 +1,4 @@
 include:
-  - docker
   - vaultwarden.install
+  - vaultwarden.config
+  - vaultwarden.service

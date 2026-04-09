@@ -1,7 +1,6 @@
 vaultwarden:
-  data_folder: /opt/vaultwarden/data
+  data_folder: /var/lib/vaultwarden
   port: 8080
-  websocket_port: 3012
   domain: "http://192.168.2.103:8080"
   signups_allowed: false
   admin_token: "changeme"
