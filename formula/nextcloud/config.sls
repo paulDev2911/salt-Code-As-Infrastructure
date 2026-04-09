@@ -77,9 +77,9 @@ nextcloud_redis_config_nc:
         sudo -u www-data php /var/www/nextcloud/occ config:system:set redis host --value="127.0.0.1" && \
         sudo -u www-data php /var/www/nextcloud/occ config:system:set redis port --value=6379 --type=integer && \
         sudo -u www-data php /var/www/nextcloud/occ config:system:set redis password --value="{{ nextcloud.redis_password }}" && \
-        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.local --value="\OC\Memcache\APCu" && \
-        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.distributed --value="\OC\Memcache\Redis" && \
-        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.locking --value="\OC\Memcache\Redis"
+        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.local --value='\OC\Memcache\APCu' && \
+        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.distributed --value='\OC\Memcache\Redis' && \
+        sudo -u www-data php /var/www/nextcloud/occ config:system:set memcache.locking --value='\OC\Memcache\Redis'
     - onchanges:
       - cmd: nextcloud_install_cmd
     - require:
