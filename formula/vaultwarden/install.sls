@@ -22,15 +22,13 @@ vaultwarden_extract:
         cd /tmp && \
         mkdir -p vaultwarden-extract && \
         cd vaultwarden-extract && \
-        /tmp/docker-image-extract vaultwarden/server:latest && \
+        /tmp/docker-image-extract vaultwarden/server:alpine && \
         cp output/vaultwarden /usr/local/bin/vaultwarden && \
         chmod +x /usr/local/bin/vaultwarden && \
         mkdir -p {{ vaultwarden.data_folder }}/web-vault && \
         cp -r output/web-vault/* {{ vaultwarden.data_folder }}/web-vault/ && \
         rm -rf /tmp/vaultwarden-extract
     - creates: /usr/local/bin/vaultwarden
-    - require:
-      - cmd: vaultwarden_extractor
 
 vaultwarden_group:
   group.present:
