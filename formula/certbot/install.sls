@@ -1,8 +1,17 @@
+{% from "certbot/map.jinja" import certbot with context %}
+
 certbot_pkg:
   pkg.installed:
     - pkgs:
       - certbot
-      - python3-certbot-dns-porkbun
+      - python3-pip
+
+certbot_dns_porkbun:
+  cmd.run:
+    - name: pip3 install certbot-dns-porkbun --break-system-packages
+    - unless: pip3 show certbot-dns-porkbun
+    - require:
+      - pkg: certbot_pkg
 
 certbot_porkbun_credentials:
   file.managed:
@@ -15,4 +24,4 @@ certbot_porkbun_credentials:
         dns_porkbun_key = {{ certbot.porkbun_api_key }}
         dns_porkbun_secret = {{ certbot.porkbun_secret_key }}
     - require:
-      - pkg: certbot_pkg
+      - cmd: certbot_dns_porkbun
