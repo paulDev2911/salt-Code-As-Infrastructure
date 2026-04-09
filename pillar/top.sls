@@ -15,3 +15,5 @@ base:
     - vault.vaultwarden
   'docs':
     - docs.nextcloud
+  'proxy':
+    - proxy.nginx

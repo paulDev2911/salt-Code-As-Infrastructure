@@ -1,0 +1,2 @@
+{% import_yaml "nginx-proxy/defaults.yaml" as defaults %}
+{%- set nginx_proxy = salt['pillar.get']('nginx_proxy', default=defaults.nginx_proxy, merge=True) %}
