@@ -71,6 +71,13 @@ nextcloud_install_cmd:
       - service: nextcloud_postgresql_service
       - service: nextcloud_php_fpm_service
 
+nextcloud_trusted_domain:
+  cmd.run:
+    - name: |
+        sudo -u www-data php /var/www/nextcloud/occ config:system:set trusted_domains 0 --value="{{ nextcloud.domain }}"
+    - require:
+      - cmd: nextcloud_install_cmd
+
 nextcloud_redis_config_nc:
   cmd.run:
     - name: |
