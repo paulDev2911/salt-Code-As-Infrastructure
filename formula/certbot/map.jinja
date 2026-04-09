@@ -1,0 +1,2 @@
+{% import_yaml "certbot/defaults.yaml" as defaults %}
+{%- set certbot = salt['pillar.get']('certbot', default=defaults.certbot, merge=True) %}

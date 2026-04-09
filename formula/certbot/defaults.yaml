@@ -1,0 +1,5 @@
+certbot:
+  email: "admin@ilpaa.xyz"
+  domains: []
+  porkbun_api_key: "changeme"
+  porkbun_secret_key: "changeme"

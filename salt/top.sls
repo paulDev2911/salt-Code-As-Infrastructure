@@ -17,3 +17,4 @@ base:
     - nextcloud
   'proxy':
     - nginx-proxy
+    - certbot

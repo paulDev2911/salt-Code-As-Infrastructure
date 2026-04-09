@@ -17,3 +17,4 @@ base:
     - docs.nextcloud
   'proxy':
     - proxy.nginx
+    - proxy.certbot

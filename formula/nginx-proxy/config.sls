@@ -10,6 +10,17 @@ nginx_proxy_{{ name }}_config:
         server {
             listen 80;
             server_name {{ proxy.domain }};
+            return 301 https://$host$request_uri;
+        }
+
+        server {
+            listen 443 ssl;
+            server_name {{ proxy.domain }};
+
+            ssl_certificate /etc/letsencrypt/live/{{ proxy.domain }}/fullchain.pem;
+            ssl_certificate_key /etc/letsencrypt/live/{{ proxy.domain }}/privkey.pem;
+            ssl_protocols TLSv1.2 TLSv1.3;
+            ssl_ciphers HIGH:!aNULL:!MD5;
 
             client_max_body_size {{ proxy.get('max_body_size', '10M') }};
 
