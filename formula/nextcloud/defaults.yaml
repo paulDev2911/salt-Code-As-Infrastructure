@@ -1,0 +1,11 @@
+nextcloud:
+  version: "30"
+  data_dir: /var/lib/nextcloud/data
+  db_name: nextcloud
+  db_user: nextcloud
+  db_password: changeme
+  admin_user: admin
+  admin_password: changeme
+  domain: "192.168.2.102"
+  php_version: "8.3"
+  redis_password: changeme

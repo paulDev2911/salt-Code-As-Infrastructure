@@ -13,3 +13,5 @@ base:
     - media.jellyfin
   'vault':
     - vault.vaultwarden
+  'docs':
+    - docs.nextcloud

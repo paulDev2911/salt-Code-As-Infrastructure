@@ -1,0 +1,2 @@
+{% import_yaml "nextcloud/defaults.yaml" as defaults %}
+{%- set nextcloud = salt['pillar.get']('nextcloud', default=defaults.nextcloud, merge=True) %}

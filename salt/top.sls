@@ -13,3 +13,5 @@ base:
     - jellyfin
   'vault':
     - vaultwarden
+  'docs':
+    - nextcloud
